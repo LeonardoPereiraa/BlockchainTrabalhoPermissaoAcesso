@@ -29,12 +29,14 @@ contract Permissao {
         );
         }
     }
-    
+
     function setMedio(address conta)public {
-        Account[conta].state = permissionLevel.Medio;
+        if(Account[msg.sender].role == AccountRole.Gerente) {
+            Account[conta].state = permissionLevel.Medio;
+        }
     }
 
-    function isMedio(address conta)public {
+    function isMedio(address conta)public view returns(bool){
         return Account[conta].state == permissionLevel.Medio;
     }
     
