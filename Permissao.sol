@@ -33,11 +33,12 @@ contract Permissao {
     function setMedio(address conta)public {
         if(Account[msg.sender].role == AccountRole.Gerente) {
             Account[conta].state = permissionLevel.Medio;
+            Account[conta].dateTimeExpiration = block.timestamp;
         }
     }
 
     function isMedio(address conta)public view returns(bool){
-        return Account[conta].state == permissionLevel.Medio;
+        return Account[conta].state >= permissionLevel.Medio && Account[conta].dateTimeExpiration > 0 days;
     }
     
 }
