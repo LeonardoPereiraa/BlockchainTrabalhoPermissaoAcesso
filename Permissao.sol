@@ -30,4 +30,12 @@ contract Permissao {
         }
     }
     
+    function setMedio(address conta)public {
+        Account[conta].state = permissionLevel.Medio;
+    }
+
+    function isMedio(address conta)public {
+        return Account[conta].state == permissionLevel.Medio;
+    }
+    
 }
