@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 enum AccountRole {Estagiario, Regular,Gerente} 
 enum permissionLevel {Baixo,Medio, Alto}
 contract Permissao {
-    uint256 public defaultDeltaDateTimeExpiration = 365 days;
+    uint256 public defaultDeltaDateTimeExpiration = 30 days;
     
     address owner;
    struct Funcionario {
@@ -33,12 +33,12 @@ contract Permissao {
     function setMedio(address conta)public {
         if(Account[msg.sender].role == AccountRole.Gerente) {
             Account[conta].state = permissionLevel.Medio;
-            Account[conta].dateTimeExpiration = block.timestamp;
+            Account[conta].dateTimeExpiration = block.timestamp + defaultDeltaDateTimeExpiration;
         }
     }
 
     function isMedio(address conta)public view returns(bool){
-        return Account[conta].state >= permissionLevel.Medio && Account[conta].dateTimeExpiration > 0 days;
+        return Account[conta].state >= permissionLevel.Medio && Account[conta].dateTimeExpiration > block.timestamp;
     }
     
 }
