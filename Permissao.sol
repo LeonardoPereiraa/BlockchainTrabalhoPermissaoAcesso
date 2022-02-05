@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-enum AccountRole {Estagiario, Regular,Gerente} 
+enum AccountRole {Estagiario, Regular,Gerente}
 enum permissionLevel {Baixo,Medio, Alto}
 contract Permissao {
     uint256 public defaultDeltaDateTimeExpiration = 365 days;
-    
+
     address owner;
    struct Funcionario {
         permissionLevel state;
         AccountRole role;
-        uint256 dateTimeExpiration; 
+        uint256 dateTimeExpiration;
     }
     mapping(address => Funcionario) public Account;
-    constructor(){   
+    constructor(){
         Account[msg.sender] = Funcionario(permissionLevel.Alto ,
                 AccountRole.Gerente,
-                block.timestamp 
+                block.timestamp
 
         );
         owner = msg.sender;
@@ -39,5 +39,26 @@ contract Permissao {
     function isMedio(address conta)public view returns(bool){
         return Account[conta].state == permissionLevel.Medio;
     }
-    
+
+    function setAlto(address conta) public returns(bool) {
+
+        if (Account[msg.sender].role == AccountRole.Gerente) {
+
+            Account[conta].state = permissionLevel.Alto;
+            return true;
+
+        } else { return false; }
+
+    }
+
+    function isAlto(address conta) public view returns(bool) {
+
+        if (Account[conta].state == permissionLevel.Alto) {
+
+            return true;
+
+        } else { return false; }
+
+    }
+
 }
