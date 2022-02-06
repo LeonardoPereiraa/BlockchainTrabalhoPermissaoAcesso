@@ -44,7 +44,7 @@ contract Permissao {
 
     function setAlto(address conta) public returns(bool) {
 
-        if (Account[msg.sender].role == AccountRole.Gerente) {
+        if (msg.sender == owner) {
 
             Account[conta].state = permissionLevel.Alto;
             // Nível mais alto possuiria tempo de expiração mais curto?
