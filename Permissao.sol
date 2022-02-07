@@ -6,21 +6,21 @@ enum permissionLevel {Baixo,Medio, Alto}
 contract Permissao {
 
     uint256 public defaultDeltaDateTimeExpiration = 30 days;
-    address owner;
-
+    address public owner;
+    event solicitarPermissao(address solicitante, address paraConta, permissionLevel nivel );
     struct Funcionario {
         permissionLevel state;
         AccountRole role;
         uint256 dateTimeExpiration;
     }
     mapping(address => Funcionario) public Account;
-    constructor(){
+    constructor(address _ower){
         Account[msg.sender] = Funcionario(permissionLevel.Alto ,
                 AccountRole.Gerente,
                 block.timestamp
 
         );
-        owner = msg.sender;
+        owner = _ower;
     }
     function add(address conta, uint256 funcao)public {
         if(Account[msg.sender].role == AccountRole.Gerente) {
@@ -65,5 +65,18 @@ contract Permissao {
         } else { return false; }
 
     }
+    function setBaixo(address conta)public {
+        if(Account[msg.sender].role == AccountRole.Gerente) {
+            Account[conta] = permissionLevel.Baixo;
+            Account[conta].dateTimeExpiration = block.timestamp ;
+        }
+    }
+    function solicitarPermissaoAlta(address conta) public{
+        if(Account[msg.sender].role == AccountRole.Gerente){
+            emit solicitarPermissao(msg.sender,conta,permissionLevel.Alto);
+        }
+        
+    }
+
 
 }
