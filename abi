@@ -1,0 +1,207 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_ower",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "solicitante",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "paraConta",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum permissionLevel",
+				"name": "nivel",
+				"type": "uint8"
+			}
+		],
+		"name": "solicitarPermissao",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "Account",
+		"outputs": [
+			{
+				"internalType": "enum permissionLevel",
+				"name": "state",
+				"type": "uint8"
+			},
+			{
+				"internalType": "enum AccountRole",
+				"name": "role",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dateTimeExpiration",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "conta",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "funcao",
+				"type": "uint256"
+			}
+		],
+		"name": "add",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "defaultDeltaDateTimeExpiration",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "conta",
+				"type": "address"
+			}
+		],
+		"name": "isAlto",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "conta",
+				"type": "address"
+			}
+		],
+		"name": "isMedio",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "conta",
+				"type": "address"
+			}
+		],
+		"name": "setAlto",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "conta",
+				"type": "address"
+			}
+		],
+		"name": "setBaixo",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "conta",
+				"type": "address"
+			}
+		],
+		"name": "setMedio",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "conta",
+				"type": "address"
+			}
+		],
+		"name": "solicitarPermissaoAlta",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
