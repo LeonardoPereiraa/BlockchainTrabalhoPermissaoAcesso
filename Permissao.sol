@@ -67,7 +67,7 @@ contract Permissao {
     }
     function setBaixo(address conta)public {
         if(Account[msg.sender].role == AccountRole.Gerente) {
-            Account[conta] = permissionLevel.Baixo;
+            Account[conta].state = permissionLevel.Baixo;
             Account[conta].dateTimeExpiration = block.timestamp ;
         }
     }
