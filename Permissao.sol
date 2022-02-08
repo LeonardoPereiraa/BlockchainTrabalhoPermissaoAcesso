@@ -47,7 +47,6 @@ contract Permissao {
         if (msg.sender == owner) {
 
             Account[conta].state = permissionLevel.Alto;
-            // Nível mais alto possuiria tempo de expiração mais curto?
             Account[conta].dateTimeExpiration = block.timestamp + defaultDeltaDateTimeExpiration;
             return true;
 
@@ -75,7 +74,7 @@ contract Permissao {
         if(Account[msg.sender].role == AccountRole.Gerente){
             emit solicitarPermissao(msg.sender,conta,permissionLevel.Alto);
         }
-        
+
     }
 
 
