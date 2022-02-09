@@ -22,7 +22,7 @@ contract Permissao {
         );
         owner = _ower;
     }
-    function add(address conta, uint256 funcao)public returns(bool) {
+    function add(address conta, uint256 funcao)public view returns(bool) {
         if(Account[msg.sender].role == AccountRole.Gerente) {
             Account[conta] = Funcionario(permissionLevel.Baixo ,
                 AccountRole(funcao),
@@ -33,7 +33,7 @@ contract Permissao {
         return false;
     }
 
-    function setMedio(address conta)public returns(bool) {
+    function setMedio(address conta)public view returns(bool) {
         if(Account[msg.sender].role == AccountRole.Gerente) {
             Account[conta].state = permissionLevel.Medio;
             Account[conta].dateTimeExpiration = block.timestamp + defaultDeltaDateTimeExpiration;
@@ -43,10 +43,11 @@ contract Permissao {
     }
 
     function isMedio(address conta)public view returns(bool){
-        return Account[conta].state >= permissionLevel.Medio && Account[conta].dateTimeExpiration > block.timestamp;
+        return Account[conta].state >= permissionLevel.Medio 
+        && Account[conta].dateTimeExpiration > block.timestamp;
     }
 
-    function setAlto(address conta) public returns(bool) {
+    function setAlto(address conta) public view returns(bool) {
 
         if(msg.sender == owner){
             Account[conta].state = permissionLevel.Alto;
@@ -58,19 +59,19 @@ contract Permissao {
 
     function isAlto(address conta) public view returns(bool) {
         return Account[conta].state == permissionLevel.Alto
-            && Account[conta].dateTimeExpiration > block.timestamp)
+            && Account[conta].dateTimeExpiration > block.timestamp;
     }
-    function setBaixo(address conta)public {
+    function setBaixo(address conta)public view returns(bool) {
         if(Account[msg.sender].role == AccountRole.Gerente) {
             Account[conta].state = permissionLevel.Baixo;
             Account[conta].dateTimeExpiration = block.timestamp ;
+            return true;
         }
+        return false;
     }
     function solicitarPermissaoAlta(address conta) public{
         if(Account[msg.sender].role == AccountRole.Gerente){
             emit solicitarPermissao(msg.sender,conta,permissionLevel.Alto);
         }
     }
-
-
 }
