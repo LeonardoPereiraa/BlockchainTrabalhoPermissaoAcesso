@@ -22,20 +22,24 @@ contract Permissao {
         );
         owner = _ower;
     }
-    function add(address conta, uint256 funcao)public {
+    function add(address conta, uint256 funcao)public returns(bool) {
         if(Account[msg.sender].role == AccountRole.Gerente) {
             Account[conta] = Funcionario(permissionLevel.Baixo ,
                 AccountRole(funcao),
                 block.timestamp
-        );
+            );
+            return true;
         }
+        return false;
     }
 
-    function setMedio(address conta)public {
+    function setMedio(address conta)public returns(bool) {
         if(Account[msg.sender].role == AccountRole.Gerente) {
             Account[conta].state = permissionLevel.Medio;
             Account[conta].dateTimeExpiration = block.timestamp + defaultDeltaDateTimeExpiration;
+            return true;
         }
+        return false;
     }
 
     function isMedio(address conta)public view returns(bool){
@@ -44,25 +48,17 @@ contract Permissao {
 
     function setAlto(address conta) public returns(bool) {
 
-        if (msg.sender == owner) {
-
+        if(msg.sender == owner){
             Account[conta].state = permissionLevel.Alto;
             Account[conta].dateTimeExpiration = block.timestamp + defaultDeltaDateTimeExpiration;
             return true;
-
-        } else { return false; }
-
+        }
+        return false;
     }
 
     function isAlto(address conta) public view returns(bool) {
-
-        if (Account[conta].state == permissionLevel.Alto
-            && Account[conta].dateTimeExpiration > block.timestamp) {
-
-            return true;
-
-        } else { return false; }
-
+        return Account[conta].state == permissionLevel.Alto
+            && Account[conta].dateTimeExpiration > block.timestamp)
     }
     function setBaixo(address conta)public {
         if(Account[msg.sender].role == AccountRole.Gerente) {
@@ -74,7 +70,6 @@ contract Permissao {
         if(Account[msg.sender].role == AccountRole.Gerente){
             emit solicitarPermissao(msg.sender,conta,permissionLevel.Alto);
         }
-
     }
 
 
